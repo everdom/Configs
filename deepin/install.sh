@@ -7,7 +7,7 @@ mkdir ../build
 cd ../build
 
 # install tools
-sudo apt install -y curl wget aria2 zsh vim tmux git ctags cscope cowsay fortune fortune-zh trash-cli fonts-powerline fonts-firacode
+sudo apt install -y curl wget aria2 zsh vim tmux git ctags cscope cowsay fortune fortune-zh trash-cli fonts-powerline fonts-firacode fish
 
 # set zsh to default
 
@@ -32,6 +32,10 @@ git clone https://github.com/powerline/fonts.git --depth=1
 cd fonts
 ./install.sh
 # clean-up a bit
+
+sudo mkfontscale
+sudo mkfontdir
+sudo fc-cache -fv
 cd ..
 #rm -rf fonts
 
@@ -58,13 +62,16 @@ git config --global core.editor vim
 aria2c http://ftp.gnu.org/gnu/emacs/emacs-26.2.tar.xz
 tar -xzvf emacs* && cd emacs*
 # install emacs dependencies
-sudo apt install libjpeg-dev libpng-dev libtiff5-dev libxaw3dxft8-dev librsvg2-dev libcairo2-dev liblcmaps-dev imagemagick libgpm-dev libdbus-1-dev libgconf2-dev libfreetype6-dev libm17n-dev libotf-dev libxft-dev libsystemd-dev
+sudo apt install -y libjpeg-dev libpng-dev libtiff5-dev libxaw3dxft8-dev librsvg2-dev libcairo2-dev liblcmaps-dev imagemagick libgpm-dev libdbus-1-dev libgconf2-dev libfreetype6-dev libm17n-dev libotf-dev libxft-dev libsystemd-dev
 ./configure --with-mailutils --without-selinux
 make
 sudo make install
 
 # install spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+cd ~/.emacs.d/
+git checkout develop
+cd $dir
 ln -s $dir/.spacemacs ~/
 
 # install linuxbrew
