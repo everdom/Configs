@@ -1,0 +1,18 @@
+" Press `,,s` to activate AceJump
+map ,,s :action AceAction<CR>
+" Press `,,S` to activate Target Mode
+map ,,S :action AceTargetAction<CR>
+" Press `,,l` to activate Line Mode
+map ,,l :action AceLineAction<CR>
+
+set clipboard+=unnamed
+set surround
+set multiple-cursors
+
+"set number relativenumber
+
+"augroup numbertoggle
+  "autocmd!
+  "autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  "autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+"augroup END
