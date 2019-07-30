@@ -33,9 +33,6 @@ cd fonts
 ./install.sh
 # clean-up a bit
 
-sudo mkfontscale
-sudo mkfontdir
-sudo fc-cache -fv
 cd ..
 #rm -rf fonts
 
@@ -71,8 +68,18 @@ sudo make install
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 cd ~/.emacs.d/
 git checkout develop
-cd $dir
-ln -s $dir/.spacemacs ~/
+rm ~/.spacemacs.bak
+mv ~/.spacemacs ~/.spacemacs.bak
+ln -s $dir/.spacemacs ~/.spacemacs
+
+# install tmux config
+git clone https://github.com/gpakosz/.tmux.git ~/
+ln -s -f .tmux/.tmux.conf ~/
+cp ~/.tmux/.tmux.conf.local ~/
+echo "tmux_conf_theme_left_separator_main='\uE0B0'">>~/.tmux.conf.local
+echo "tmux_conf_theme_left_separator_sub='\uE0B1'">>~/.tmux.conf.local
+echo "tmux_conf_theme_right_separator_main='\uE0B2'">>~/.tmux.conf.local
+echo "tmux_conf_theme_right_separator_sub='\uE0B3'">>~/.tmux.conf.local
 
 # install linuxbrew
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
@@ -85,7 +92,7 @@ echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.zprofile
 
 # install fzf ccat exa
 brew install fzf
-(brew --prefix)/opt/fzf/install
+$(brew --prefix)/opt/fzf/install
 brew install ccat
 brew install exa
 
