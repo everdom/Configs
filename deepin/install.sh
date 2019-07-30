@@ -7,7 +7,7 @@ mkdir ../build
 cd ../build
 
 # install tools
-sudo apt install -y curl wget aria2 zsh vim tmux git ctags cscope cowsay fortune fortune-zh trash-cli fonts-powerline fonts-firacode fish
+sudo apt install -y curl wget aria2 zsh vim tmux git ctags cscope cowsay fortune fortune-zh trash-cli fonts-powerline fonts-firacode fish htop
 
 # set zsh to default
 chsh -s /usr/bin/zsh
