@@ -10,6 +10,7 @@ cd ../build
 sudo apt install -y curl wget aria2 zsh vim tmux git ctags cscope cowsay fortune fortune-zh trash-cli fonts-powerline fonts-firacode fish
 
 # set zsh to default
+chsh -s /usr/bin/zsh
 
 # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -71,15 +72,24 @@ git checkout develop
 rm ~/.spacemacs.bak
 mv ~/.spacemacs ~/.spacemacs.bak
 ln -s $dir/.spacemacs ~/.spacemacs
+sudo apt install graphviz
 
 # install tmux config
 git clone https://github.com/gpakosz/.tmux.git ~/
 ln -s -f .tmux/.tmux.conf ~/
 cp ~/.tmux/.tmux.conf.local ~/
-echo "tmux_conf_theme_left_separator_main='\uE0B0'">>~/.tmux.conf.local
-echo "tmux_conf_theme_left_separator_sub='\uE0B1'">>~/.tmux.conf.local
-echo "tmux_conf_theme_right_separator_main='\uE0B2'">>~/.tmux.conf.local
-echo "tmux_conf_theme_right_separator_sub='\uE0B3'">>~/.tmux.conf.local
+#echo "tmux_conf_theme_left_separator_main='\ue0b0'">>~/.tmux.conf.local
+#echo "tmux_conf_theme_left_separator_sub='\ue0b1'">>~/.tmux.conf.local
+#echo "tmux_conf_theme_right_separator_main='\ue0b2'">>~/.tmux.conf.local
+#echo "tmux_conf_theme_right_separator_sub='\ue0b3'">>~/.tmux.conf.local
+rm ~/.tmux.conf.local.bak
+mv ~/.tmux.conf.local ~/.tmux.conf.local.bak
+ln -s $dir/.tmux.conf.local ~/.tmux.conf.local
+
+# install terminal tools
+sudo apt install pry mutt irssi cmus moc ranger gdb cgdb
+ln -s -f $dir/.tmux.sh ~/.tmux.sh
+
 
 # install linuxbrew
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"

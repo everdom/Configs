@@ -112,8 +112,22 @@ alias rm="trash"
 alias cat="ccat"
 alias ls="exa -hg"
 alias la="exa -hga"
+alias lla="exa -hlga"
 alias szshrc=". ~/.zshrc"
 
+#fun
+alias 'today=calendar -A 0 -f /usr/share/calendar/calendar.mark | sort'
+alias 'dus=du -sckx * | sort -nr'
+alias 'adventure=emacs -batch -l dunnet'
+alias 'mailsize=du -hs ~/mail'
+alias 'bk=cd $OLDPWD'
+alias 'ttop=top -ocpu -R -F -s 2 -n30'
+alias lh='ls -a | egrep "^\."'
+
+#
+# Tmux
+#
+alias tnew='tmux -f ~/.tmux.conf new-session \; split-window -h \; split-window -v \; attach'
 
 bindkey "^[," autosuggest-accept
 bindkey "^[." autosuggest-execute
@@ -136,9 +150,18 @@ TRAPWINCH() {
   zle && { zle reset-prompt; zle -R }
 }
 
+# myIP address
+function myip() {
+    ifconfig lo | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+    ifconfig enp4s0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig enp4s0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #nohup /usr/local/cow/cow&
 source ~/.zprofile
+
+if [ "$TMUX" = "" ]; then ~/.tmux.sh; fi
 
 fortune|cowsay
