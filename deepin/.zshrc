@@ -162,6 +162,9 @@ function myip() {
 #nohup /usr/local/cow/cow&
 source ~/.zprofile
 
-if [ "$TMUX" = "" ]; then ~/.tmux.sh; fi
+tmx(){
+    if [ "$TMUX" = "" ]; then ~/.tmux.sh; fi
+}
+tmx
 
 fortune|cowsay
