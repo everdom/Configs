@@ -81,7 +81,8 @@ echo "--------------------------------------------------------------------------
 echo "install emacs26..."
 echo "--------------------------------------------------------------------------------"
 aria2c http://ftp.gnu.org/gnu/emacs/emacs-26.3.tar.xz
-tar -xvf emacs* && cd emacs*
+tar -xvf emacs*
+cd emacs-26.3
 # install emacs dependencies
 sudo apt install -y libjpeg-dev libpng-dev libtiff5-dev libxaw3dxft8-dev librsvg2-dev libcairo2-dev liblcmaps-dev imagemagick libgpm-dev libdbus-1-dev libgconf2-dev libfreetype6-dev libm17n-dev libotf-dev libxft-dev libsystemd-dev
 ./configure --with-mailutils --without-selinux
