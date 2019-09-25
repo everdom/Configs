@@ -165,6 +165,6 @@ source ~/.zprofile
 tmx(){
     if [ "$TMUX" = "" ]; then ~/.tmux.sh; fi
 }
-tmx
+#tmx
 
 fortune|cowsay

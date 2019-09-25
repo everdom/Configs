@@ -1,30 +1,29 @@
 #!/bin/bash
 
 dir=`pwd`
-
 # make directory
 mkdir ../build
 cd ../build
 
-# install tools
-sudo apt install -y curl wget aria2 zsh vim tmux git ctags cscope cowsay fortune fortune-zh trash-cli fonts-powerline fonts-firacode fish htop
+echo "install packages..."
+sudo apt install -y curl wget aria2 zsh vim tmux git ctags cscope cowsay fortune fortune-zh trash-cli fonts-powerline fonts-firacode fish htop vim-gtk
 
-# set zsh to default
+echo "set zsh to default..."
 chsh -s /usr/bin/zsh
 
-# install oh-my-zsh
+echo "install oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-# install oh-my-zsh extra plugins
+echo "install oh-my-zsh extra plugins..."
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
-# install powerline fonts
+echo "install powerline fonts..."
 wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
 mv PowerlineSymbols.otf ~/.local/share/fonts/
-fc-cache -vf ~/.local/share/fonts/
+sudo fc-cache -vf ~/.local/share/fonts/
 mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
 # clone
@@ -37,26 +36,31 @@ cd fonts
 cd ..
 #rm -rf fonts
 
-# make signal links to share zsh configs among all users
+echo "make signal links to share zsh configs among all users..."
+echo "--------------------------------------------------------------------------------"
 rm ~/.zshrc.bak
 mv ~/.zshrc ~/.zshrc.bak
-ln -s $dir/.zshrc ~/.zshrc
+ln -s $HOME/.zshrc ~/.zshrc
 
-# install spf13 vim config
+echo "install spf13 vim config..."
+echo "--------------------------------------------------------------------------------"
 curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
 
-# make signal links to share vim configs among all users
+echo "make signal links to share vim configs among all users..."
+echo "--------------------------------------------------------------------------------"
 rm ~/.vimrc.local.bak
 mv ~/.vimrc.local ~/.vimrc.local.bak
-ln -s $dir/.vimrc.local ~/.vimrc.local
+ln -s $HOME/.vimrc.local ~/.vimrc.local
 
 rm ~/.ideavimrc.bak
 mv ~/.ideavimrc ~/.ideavimrc.bak
 
-# set git editor to vim
+echo "set git editor to vim..."
+echo "--------------------------------------------------------------------------------"
 git config --global core.editor vim
 
-# install emacs26
+echo "install emacs26..."
+echo "--------------------------------------------------------------------------------"
 aria2c http://ftp.gnu.org/gnu/emacs/emacs-26.2.tar.xz
 tar -xzvf emacs* && cd emacs*
 # install emacs dependencies
@@ -65,18 +69,20 @@ sudo apt install -y libjpeg-dev libpng-dev libtiff5-dev libxaw3dxft8-dev librsvg
 make
 sudo make install
 
-# install spacemacs
+echo "install spacemacs..."
+echo "--------------------------------------------------------------------------------"
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 cd ~/.emacs.d/
 git checkout develop
 rm ~/.spacemacs.bak
 mv ~/.spacemacs ~/.spacemacs.bak
-ln -s $dir/.spacemacs ~/.spacemacs
+ln -s $HOME/.spacemacs ~/.spacemacs
 sudo apt install graphviz
 
-# install tmux config
-git clone https://github.com/gpakosz/.tmux.git ~/
-ln -s -f .tmux/.tmux.conf ~/
+echo "install tmux config..."
+echo "--------------------------------------------------------------------------------"
+git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+ln -s -f $HOME/.tmux/.tmux.conf ~/
 cp ~/.tmux/.tmux.conf.local ~/
 #echo "tmux_conf_theme_left_separator_main='\ue0b0'">>~/.tmux.conf.local
 #echo "tmux_conf_theme_left_separator_sub='\ue0b1'">>~/.tmux.conf.local
@@ -84,14 +90,16 @@ cp ~/.tmux/.tmux.conf.local ~/
 #echo "tmux_conf_theme_right_separator_sub='\ue0b3'">>~/.tmux.conf.local
 rm ~/.tmux.conf.local.bak
 mv ~/.tmux.conf.local ~/.tmux.conf.local.bak
-ln -s $dir/.tmux.conf.local ~/.tmux.conf.local
+ln -s $HOME/.tmux.conf.local ~/.tmux.conf.local
 
-# install terminal tools
+echo "install terminal tools..."
+echo "--------------------------------------------------------------------------------"
 sudo apt install pry mutt irssi cmus moc ranger gdb cgdb
-ln -s -f $dir/.tmux.sh ~/.tmux.sh
+ln -s -f $HOME/.tmux.sh ~/.tmux.sh
 
 
-# install linuxbrew
+echo "install linuxbrew..."
+echo "--------------------------------------------------------------------------------"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
 test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -100,7 +108,8 @@ test -r ~/.zprofile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.z
 echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
 echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.zprofile
 
-# install fzf ccat exa
+echo "install fzf ccat exa..."
+echo "--------------------------------------------------------------------------------"
 brew install fzf
 $(brew --prefix)/opt/fzf/install
 brew install ccat
