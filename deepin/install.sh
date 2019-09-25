@@ -25,24 +25,32 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
-echo "--------------------------------------------------------------------------------"
-echo "install powerline fonts..."
-echo "--------------------------------------------------------------------------------"
-wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-mv PowerlineSymbols.otf ~/.local/share/fonts/
-fc-cache -vf ~/.local/share/fonts/
-mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+#echo "--------------------------------------------------------------------------------"
+#echo "install powerline fonts..."
+#echo "--------------------------------------------------------------------------------"
+#wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+#wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+#mv PowerlineSymbols.otf ~/.local/share/fonts/
+#fc-cache -vf ~/.local/share/fonts/
+#mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
-# clone
-git clone https://github.com/powerline/fonts.git --depth=1
-# install
-cd fonts
-./install.sh
-# clean-up a bit
+## clone
+#git clone https://github.com/powerline/fonts.git --depth=1
+## install
+#cd fonts
+#./install.sh
+## clean-up a bit
 
-cd ..
+#cd ..
 #rm -rf fonts
+
+echo "--------------------------------------------------------------------------------"
+echo "install nerd fonts..."
+echo "--------------------------------------------------------------------------------"
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
+cd nerd-fonts
+./install
+cd ..
 
 echo "--------------------------------------------------------------------------------"
 echo "make signal links to share zsh configs among all users..."
@@ -85,7 +93,8 @@ echo "install spacemacs..."
 echo "--------------------------------------------------------------------------------"
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 cd ~/.emacs.d/
-git checkout develop
+#git checkout develop
+git checkout b110ac09f94c6a412747172584c21baf3d31f507
 rm ~/.spacemacs.bak
 mv ~/.spacemacs ~/.spacemacs.bak
 ln -s $HOME/.spacemacs ~/.spacemacs
