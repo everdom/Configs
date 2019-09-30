@@ -8,7 +8,7 @@ cd ../build
 echo "--------------------------------------------------------------------------------"
 echo "install packages..."
 echo "--------------------------------------------------------------------------------"
-sudo apt install -y curl wget aria2 zsh vim tmux git ctags cscope cowsay fortune fortune-zh trash-cli fonts-powerline fonts-firacode fish htop vim-gtk
+sudo apt install -y curl wget aria2 zsh vim tmux git ctags cscope cowsay fortune fortune-zh trash-cli fonts-powerline fonts-firacode fish htop vim-gtk build-essential proxychains
 
 echo "set zsh to default..."
 chsh -s /usr/bin/zsh
@@ -49,7 +49,7 @@ echo "install nerd fonts..."
 echo "--------------------------------------------------------------------------------"
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 cd nerd-fonts
-./install
+./install.sh
 cd ..
 
 echo "--------------------------------------------------------------------------------"
@@ -57,7 +57,7 @@ echo "make signal links to share zsh configs among all users..."
 echo "--------------------------------------------------------------------------------"
 rm ~/.zshrc.bak
 mv ~/.zshrc ~/.zshrc.bak
-ln -s $HOME/.zshrc ~/.zshrc
+ln -s $dir/.zshrc ~/.zshrc
 
 echo "--------------------------------------------------------------------------------"
 echo "install spf13 vim config..."
@@ -69,10 +69,11 @@ echo "make signal links to share vim configs among all users..."
 echo "--------------------------------------------------------------------------------"
 rm ~/.vimrc.local.bak
 mv ~/.vimrc.local ~/.vimrc.local.bak
-ln -s $HOME/.vimrc.local ~/.vimrc.local
+ln -s $dir/.vimrc.local ~/.vimrc.local
 
 rm ~/.ideavimrc.bak
 mv ~/.ideavimrc ~/.ideavimrc.bak
+ln -s $dir/.ideavimrc ~/.ideavimrc
 
 echo "set git editor to vim..."
 git config --global core.editor vim
@@ -84,7 +85,7 @@ aria2c http://ftp.gnu.org/gnu/emacs/emacs-26.3.tar.xz
 tar -xvf emacs*
 cd emacs-26.3
 # install emacs dependencies
-sudo apt install -y libjpeg-dev libpng-dev libtiff5-dev libxaw3dxft8-dev librsvg2-dev libcairo2-dev liblcmaps-dev imagemagick libgpm-dev libdbus-1-dev libgconf2-dev libfreetype6-dev libm17n-dev libotf-dev libxft-dev libsystemd-dev
+sudo apt install -y libjpeg-dev libpng-dev libtiff5-dev libxaw3dxft8-dev librsvg2-dev libcairo2-dev liblcmaps-dev imagemagick libgpm-dev libdbus-1-dev libgconf2-dev libfreetype6-dev libm17n-dev libotf-dev libxft-dev libsystemd-dev libxaw7-dev libgif-dev libtinfo-dev libncurses5-dev
 ./configure --with-mailutils --without-selinux
 make -j8
 sudo make install
@@ -94,11 +95,11 @@ echo "install spacemacs..."
 echo "--------------------------------------------------------------------------------"
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 cd ~/.emacs.d/
-#git checkout develop
-git checkout b110ac09f94c6a412747172584c21baf3d31f507
+git checkout develop
+#git checkout b110ac09f94c6a412747172584c21baf3d31f507
 rm ~/.spacemacs.bak
 mv ~/.spacemacs ~/.spacemacs.bak
-ln -s $HOME/.spacemacs ~/.spacemacs
+ln -s $dir/.spacemacs ~/.spacemacs
 sudo apt install graphviz
 
 echo "--------------------------------------------------------------------------------"
@@ -113,13 +114,13 @@ cp ~/.tmux/.tmux.conf.local ~/
 #echo "tmux_conf_theme_right_separator_sub='\ue0b3'">>~/.tmux.conf.local
 rm ~/.tmux.conf.local.bak
 mv ~/.tmux.conf.local ~/.tmux.conf.local.bak
-ln -s $HOME/.tmux.conf.local ~/.tmux.conf.local
+ln -s $dir/.tmux.conf.local ~/.tmux.conf.local
 
 echo "--------------------------------------------------------------------------------"
 echo "install terminal tools..."
 echo "--------------------------------------------------------------------------------"
 sudo apt install pry mutt irssi cmus moc ranger gdb cgdb
-ln -s -f $HOME/.tmux.sh ~/.tmux.sh
+ln -s -f $dir/.tmux.sh ~/.tmux.sh
 
 
 echo "--------------------------------------------------------------------------------"

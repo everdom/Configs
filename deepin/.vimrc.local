@@ -1,3 +1,4 @@
+set wrap
 let g:rainbow_conf = {
 \    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
 \    'ctermfgs': ['darkred', 'blue', 'yellow', 'cyan', 'magenta', 'brown']
